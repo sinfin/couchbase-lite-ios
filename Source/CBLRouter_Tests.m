@@ -971,7 +971,9 @@ TestCase(CBL_Router) {
     RequireTestCase(CBL_Router_Docs);
     RequireTestCase(CBL_Router_AllDocs);
     RequireTestCase(CBL_Router_LongPollChanges);
+    RequireTestCase(CBL_Router_LongPollChanges_Heartbeat);
     RequireTestCase(CBL_Router_ContinuousChanges);
+    RequireTestCase(CBL_Router_ContinuousChanges_Heartbeat);
     RequireTestCase(CBL_Router_GetAttachment);
     RequireTestCase(CBL_Router_GetJSONAttachment);
     RequireTestCase(CBL_Router_RevsDiff);
