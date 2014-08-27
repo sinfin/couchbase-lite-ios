@@ -618,6 +618,11 @@
                                                  selector: @selector(dbChanged:)
                                                      name: CBL_DatabaseChangesNotification
                                                    object: db];
+        
+        NSTimeInterval heartbeat = [self intQuery: @"heartbeat" defaultValue: 0] / 1000;
+        if (heartbeat > 0)
+            [self startHeartbeat: heartbeat];
+        
         // Don't close connection; more data to come
         return 0;
     } else {

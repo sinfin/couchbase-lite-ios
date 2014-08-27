@@ -653,6 +653,33 @@ static NSArray* splitPath( NSURL* url ) {
     [self finished];
 }
 
+#pragma mark - Heartbeat
+
+- (void) sendHeartbeatResponse {
+    if (_onDataAvailable) {
+        _onDataAvailable([@"\r\n" dataUsingEncoding:NSUTF8StringEncoding], NO);
+    }
+}
+
+
+- (void) startHeartbeat: (NSTimeInterval)interval {
+    if (interval <= 0)
+        return;
+    
+    [_heartbeatTimer invalidate];
+    _heartbeatTimer = [NSTimer scheduledTimerWithTimeInterval: interval
+                                                       target: self
+                                                     selector: @selector(sendHeartbeatResponse)
+                                                     userInfo: nil
+                                                      repeats: YES];
+}
+
+
+- (void) stopHeartbeat {
+    [_heartbeatTimer invalidate];
+    _heartbeatTimer = nil;
+}
+
 
 @end
 
