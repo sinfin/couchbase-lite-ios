@@ -521,12 +521,9 @@ static bool digestToBlobKey(NSString* digest, CBLBlobKey* key) {
                 return nil;
             }
             id revPosObj = attachInfo[@"revpos"];
-            if (revPosObj) {
-                int revPos = [$castIf(NSNumber, revPosObj) intValue];
-                if (revPos <= 0) {
-                    *outStatus = kCBLStatusBadAttachment;
-                    return nil;
-                }
+            if (!revPosObj) { // allow any (even bogus) attachInfo[@"revpos"]
+                *outStatus = kCBLStatusBadAttachment;
+                return nil;
             }
             continue;
         }
